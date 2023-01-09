@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../Content/Css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <section class="webdesigntuts-workshop">
+        <form>
+            <input id="txtUsername" type="text" placeholder="enter username">
+            <button id="btnLogin">login</button>
+        </form>
+    </section>
+    <script src="../Content/Scripts/CheckName.js"></script>
+    <script src="../Content/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../Content/Scripts/aes.min.js"></script>
+    <script type="text/javascript">
+        $(function ()
+        {
+            $("#txtUsername").focus();
+            $("#btnLogin").click(function (e)
+            {
+                e.preventDefault();
+                var username = $("#txtUsername").val();
+                if (Check(username))
+                {
+                    var re = new RegExp(/^.*\//);
+                    window.location = re.exec(window.location.href) +"Chat.html?hash=" + CryptoJS.AES.encrypt(username, 'secret key 123');
+                }
+                else
+                    alert('wrong username.try again');
+            });
+        });
+    </script>
+</body>
+</html>
